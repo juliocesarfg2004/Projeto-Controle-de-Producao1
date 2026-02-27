@@ -18,6 +18,10 @@ app.use(
   })
 );
 
+app.get('/', (_req, res) => {
+  res.send('Hello wolrd')
+})
+
 app.use("/", usersRouter);
 app.use("/", produtosRouter);
 app.use("/", produtosTiposRouter);
@@ -27,7 +31,7 @@ app.get("/health", (_req, res) => {
   res.json({ status: "OK", message: "API está funcionando" });
 });
 
-app.use((req, res) => {
+app.use((_req, res) => {
   res.status(404).json({ error: "Rota não encontrada" });
 });
 
