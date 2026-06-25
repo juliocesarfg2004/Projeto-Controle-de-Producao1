@@ -45,7 +45,8 @@ export const loginUsuario = async (email, senha) => {
     {
       id: usuario.usuario_id,
       email: usuario.login,
-      nome: usuario.nome
+      nome: usuario.nome,
+      tipo: usuario.tipo
     },
     JWT_SECRET,
     { expiresIn: '1d' }

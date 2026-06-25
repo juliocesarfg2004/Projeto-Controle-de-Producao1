@@ -12,6 +12,7 @@ model Usuario {
   nome           String    @db.VarChar(200)
   login          String    @unique @db.VarChar(255)
   senha          String    @db.VarChar(255)
+  tipo           String    @default("funcionario") @db.VarChar(20)
   atualizado_em  DateTime? @db.Timestamp(6)
   atualizado_por Int?
 

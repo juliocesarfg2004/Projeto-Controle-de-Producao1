@@ -6,6 +6,7 @@ const getAllUsuarios = async () => {
             usuario_id: true,
             nome: true,
             login: true,
+            tipo: true,
             atualizado_em: true
         }
     });
@@ -18,6 +19,7 @@ const getUsuario = async (id) => {
             usuario_id: true,
             nome: true,
             login: true,
+            tipo: true,
             atualizado_em: true
         }
     });
@@ -42,6 +44,7 @@ const updateUsuario = async (id, data) => {
             usuario_id: true,
             nome: true,
             login: true,
+            tipo: true,
             atualizado_em: true
         }
     });

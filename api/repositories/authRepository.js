@@ -16,6 +16,7 @@ export const createUser = async (nome, email, senha) => {
         usuario_id: true,
         nome: true,
         login: true,
+        tipo: true,
         atualizado_em: true
       }
     });

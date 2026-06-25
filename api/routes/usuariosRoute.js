@@ -55,7 +55,7 @@ router.get('/', authenticateToken, usuariosController.getAllUsuarios);
  *       404:
  *         description: Usuário não encontrado
  */
-router.get('/:id', usuariosController.getUsuario);
+router.get('/:id', authenticateToken, usuariosController.getUsuario);
 
 /**
  * @openapi
@@ -94,7 +94,7 @@ router.get('/:id', usuariosController.getUsuario);
  *       409:
  *         description: Email já está em uso
  */
-router.put('/:id', usuariosController.updateUsuario);
+router.put('/:id', authenticateToken, usuariosController.updateUsuario);
 
 /**
  * @openapi
@@ -115,6 +115,6 @@ router.put('/:id', usuariosController.updateUsuario);
  *       404:
  *         description: Usuário não encontrado
  */
-router.delete('/:id', usuariosController.deleteUsuario);
+router.delete('/:id', authenticateToken, usuariosController.deleteUsuario);
 
 export default router;
