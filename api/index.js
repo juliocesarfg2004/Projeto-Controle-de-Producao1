@@ -1,10 +1,11 @@
 import express from "express";
 import cors from "cors";
 
-import usersRouter from "./routes/usuarios.js";
-import produtosRouter from "./routes/produtos.js";
-import produtosTiposRouter from "./routes/produtosTipos.js";
-import ordemProducaoRouter from "./routes/ordemProducao.js";
+import usuarioRouter from "./routes/usuariosRoute.js";
+import produtosRouter from "./routes/produtosRoute.js";
+import produtosTiposRouter from "./routes/produtosTiposRoute.js";
+import ordemProducaoRouter from "./routes/ordemProducaoRoute.js";
+import authRouter from "./routes/authRoute.js"
 
 const app = express();
 
@@ -19,13 +20,15 @@ app.use(
 );
 
 app.get('/', (_req, res) => {
-  res.send('Hello wolrd')
-})
+  res.send('Hello world');
+});
 
-app.use("/", usersRouter);
-app.use("/", produtosRouter);
-app.use("/", produtosTiposRouter);
-app.use("/", ordemProducaoRouter);
+app.use("/auth", authRouter)
+
+app.use("/usuarios", usuarioRouter);
+app.use("/produtos", produtosRouter);
+app.use("/tipos-produtos", produtosTiposRouter);
+app.use("/ordem-producao", ordemProducaoRouter);
 
 app.get("/health", (_req, res) => {
   res.json({ status: "OK", message: "API está funcionando" });

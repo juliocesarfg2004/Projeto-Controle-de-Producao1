@@ -10,7 +10,7 @@ datasource db {
 model Usuario {
   usuario_id     Int       @id @default(autoincrement())
   nome           String    @db.VarChar(200)
-  login          String    @unique @db.VarChar(50)
+  login          String    @unique @db.VarChar(255)
   senha          String    @db.VarChar(255)
   atualizado_em  DateTime? @db.Timestamp(6)
   atualizado_por Int?
