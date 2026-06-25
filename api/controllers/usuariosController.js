@@ -32,7 +32,7 @@ export const getUsuario = async (req, res) => {
 export const updateUsuario = async (req, res) => {
   try {
     const { id } = req.params;
-    const { nome, login, senha } = req.body;
+    const { nome, login, senha } = req.body || {};
     
     const usuario = await usuariosService.updateUsuario(id, nome, login, senha);
     

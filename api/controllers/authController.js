@@ -1,9 +1,9 @@
 import * as authService from '../services/authService.js';
 
 export const register = async (req, res) => {
-  const { nome, email, senha } = req.body;
-
   try {
+    const { nome, email, senha } = req.body || {};
+
     if (!nome || !email || !senha) {
       return res.status(400).json({ 
         message: "Os campos nome, login e senha são obrigatórios" 
@@ -18,6 +18,7 @@ export const register = async (req, res) => {
     });
 
   } catch (error) {
+    console.error("Erro no registro:", error);
     if (error.status === 409) {
       return res.status(409).json({ message: error.message });
     }
@@ -29,9 +30,9 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  const { email, senha } = req.body;
-
   try {
+    const { email, senha } = req.body || {};
+
     if (!email || !senha) {
       return res.status(400).json({ 
         message: "Os campos login e senha são obrigatórios" 
@@ -46,6 +47,7 @@ export const login = async (req, res) => {
     });
 
   } catch (error) {
+    console.error("Erro no login:", error);
     if (error.status === 401) {
       return res.status(401).json({ message: error.message });
     }

@@ -1,6 +1,6 @@
 import { getByIdEmail } from '../repositories/usuariosRepository.js';
 import * as authRepository from '../repositories/authRepository.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
 
