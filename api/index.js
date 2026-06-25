@@ -7,6 +7,7 @@ import produtosRouter from "./routes/produtosRoute.js";
 import produtosTiposRouter from "./routes/produtosTiposRoute.js";
 import ordemProducaoRouter from "./routes/ordemProducaoRoute.js";
 import authRouter from "./routes/authRoute.js"
+import * as authController from "./controllers/authController.js"
 
 const app = express();
 
@@ -46,6 +47,8 @@ app.get('/', (_req, res) => {
 </body>
 </html>`);
 });
+
+app.post("/login", authController.login)
 
 app.use("/auth", authRouter)
 
