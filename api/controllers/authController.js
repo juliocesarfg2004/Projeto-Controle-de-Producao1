@@ -31,15 +31,18 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const { email, senha } = req.body || {};
+    const { email, login, senha } = req.body || {};
+    const identificador = email || login;
 
-    if (!email || !senha) {
+    if (!identificador || !senha) {
       return res.status(400).json({ 
-        message: "Os campos login e senha são obrigatórios" 
+        message: "Os campos email/login e senha são obrigatórios" 
       });
     }
 
-    const response = await authService.loginUsuario(email, senha);
+    console.log("Tentativa de login:", identificador);
+
+    const response = await authService.loginUsuario(identificador, senha);
 
     return res.status(200).json({
       message: "Login realizado com sucesso",
