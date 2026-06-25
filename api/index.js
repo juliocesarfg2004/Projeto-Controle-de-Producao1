@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./config/swagger.js";
 
 import usuarioRouter from "./routes/usuariosRoute.js";
 import produtosRouter from "./routes/produtosRoute.js";
@@ -19,9 +21,10 @@ app.use(
   })
 );
 
-app.get('/', (_req, res) => {
-  res.send('Hello world');
-});
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+  customSiteTitle: "API - Controle de Produção",
+  customfavIcon: "https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/favicon-32x32.png"
+}));
 
 app.use("/auth", authRouter)
 
