@@ -17,8 +17,7 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.3",
     "serverless-http": "^4.0.0",
-    "swagger-jsdoc": "^6.3.0",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-jsdoc": "^6.3.0"
   },
   "devDependencies": {
     "prisma": "^6.18.0"
