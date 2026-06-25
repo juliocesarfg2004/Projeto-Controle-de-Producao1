@@ -29,6 +29,7 @@ const router = express.Router();
  *       401:
  *         description: Token não fornecido
  */
+router.post('/', usuariosController.createUsuario);
 router.get('/', authenticateToken, usuariosController.getAllUsuarios);
 
 /**

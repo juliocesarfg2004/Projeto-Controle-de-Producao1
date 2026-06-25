@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import serverless from "serverless-http";
 import { swaggerSpec } from "./config/swagger.js";
 
 import usuarioRouter from "./routes/usuariosRoute.js";
@@ -12,24 +11,7 @@ import authRouter from "./routes/authRoute.js"
 const app = express();
 
 app.use(express.json());
-
-const corsOptions = {
-  origin: "*",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
-
-app.use(cors(corsOptions));
-
-app.use((req, res, next) => {
-  if (req.method === 'OPTIONS') {
-    res.set('Access-Control-Allow-Origin', '*');
-    res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    return res.status(204).send('');
-  }
-  next();
-});
+app.use(cors());
 
 app.get('/api-docs.json', (_req, res) => {
   res.json(swaggerSpec);
@@ -80,4 +62,16 @@ app.use((_req, res) => {
   res.status(404).json({ error: "Rota não encontrada" });
 });
 
-export const handler = serverless(app);
+export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if (req.method === 'OPTIONS') {
+    res.writeHead(204);
+    res.end();
+    return;
+  }
+
+  return app(req, res);
+}

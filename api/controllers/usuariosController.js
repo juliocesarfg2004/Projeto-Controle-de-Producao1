@@ -1,4 +1,37 @@
 import * as usuariosService from '../services/usuariosService.js';
+import * as authService from '../services/authService.js';
+
+export const createUsuario = async (req, res) => {
+  try {
+    const { nome, login, senha } = req.body || {};
+
+    if (!nome || !login || !senha) {
+      const email = login || req.body?.email;
+      if (!nome || !email || !senha) {
+        return res.status(400).json({
+          message: "Os campos nome, login e senha são obrigatórios"
+        });
+      }
+      const usuarioCriado = await authService.createUser(nome, email, senha);
+      return res.status(201).json({
+        message: "Usuário cadastrado com sucesso",
+        usuario: usuarioCriado
+      });
+    }
+
+    const usuarioCriado = await authService.createUser(nome, login, senha);
+    return res.status(201).json({
+      message: "Usuário cadastrado com sucesso",
+      usuario: usuarioCriado
+    });
+  } catch (error) {
+    console.error("Erro ao criar usuário:", error);
+    if (error.status === 409) {
+      return res.status(409).json({ message: error.message });
+    }
+    return res.status(500).json({ message: "Erro ao criar o usuário" });
+  }
+};
 
 export const getAllUsuarios = async (req, res) => {
   try {
